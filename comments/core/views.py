@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from .models import Comment
 from .serializers import CommentSerializer
 from rest_framework.response import Response
+import requests
 
 
 # Create your views here.
@@ -17,4 +18,10 @@ class CommentsAPIView(APIView):
         serializer = CommentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+
+        comment = serializer.data
+        r = requests.post('http://127.0.0.1:8000/api/posts/%d/comments' % comment['post_id'], data={'text': comment['text']})
+
+        if not r.ok:
+            pass
+        return Response(comment)
