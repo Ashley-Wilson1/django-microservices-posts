@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import Comment
@@ -8,7 +9,7 @@ import requests
 
 # Create your views here.
 class PostCommentAPIView(APIView):
-    def get(sel, _, pk=None):
+    def get(self, _, pk=None):
         comments = Comment.objects.filter(post_id=pk)
         serializer = CommentSerializer(comments,many=True)
         return Response(serializer.data)
@@ -20,8 +21,11 @@ class CommentsAPIView(APIView):
         serializer.save()
 
         comment = serializer.data
-        r = requests.post('http://127.0.0.1:8000/api/posts/%d/comments' % comment['post_id'], data={'text': comment['text']})
 
-        if not r.ok:
-            pass
+        if random.randint(1,10) <= 5:
+            r = requests.post('http://127.0.0.1:8000/api/posts/%d/comments' % comment['post_id'], data={'text': comment['text']})
+
+            if not r.ok:
+                pass
+            
         return Response(comment)

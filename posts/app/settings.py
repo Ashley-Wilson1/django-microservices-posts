@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_crontab',
     'core'
 ]
 
@@ -81,6 +82,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':'posts_ms',
+        'USER': 'root',
+        'PASSWORD': 'password',
+    },
+    'comments_db': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':'comments_ms',
         'USER': 'root',
         'PASSWORD': 'password',
     }
@@ -130,3 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CRONJOBS = [ 
+    ('*/1 * * * *', 'core.cron.sync_comments')
+]

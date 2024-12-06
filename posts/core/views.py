@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 
 from rest_framework.views import APIView
+
+from .cron import get_comments
 from .serializers import PostSerializer
 from .models import Post
 import json
@@ -12,14 +14,15 @@ class PostAPIView(APIView):
         posts = Post.objects.all()
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
+       
+        
     
-    
-
     def post(self,request):
         serializer = PostSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
     
 class PostCommentAPIView(APIView):
     def post(self,request, pk=None):
