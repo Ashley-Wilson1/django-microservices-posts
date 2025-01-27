@@ -10,5 +10,8 @@ A modular Django project that implements a microservices architecture to manage 
 - **Database Management:** MySQL for secure and scalable data storage.
 - **Asynchronous Messaging:** RabbitMQ for inter-service communication.
 
-
+---
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/99d47782-7302-4400-be64-cf6935263dce" />
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/af89bdf3-e87a-4309-8ea9-123c5b186cd0" />
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/a791ac62-2881-458b-b8f3-c891427c8cfa" />
 
